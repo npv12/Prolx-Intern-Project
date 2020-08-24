@@ -23,10 +23,10 @@ class ProductItem extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
-                    text: "Product Name : $productName",
+                    text: "Name : $productName",
                   ),
                   TextField(
-                    text: "Bid Price:  $bidPrice",
+                    text: "Price:  $bidPrice",
                   ),
                 ],
               ),
@@ -53,9 +53,11 @@ class ProductItem extends StatelessWidget {
 
 class TextField extends StatelessWidget {
   final String text;
+  final double fsize;
   const TextField({
     Key key,
     @required this.text,
+    this.fsize = 18,
   }) : super(key: key);
 
   @override
@@ -65,7 +67,7 @@ class TextField extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
         child: Text(
           text,
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: fsize),
         ),
       ),
     );
