@@ -57,4 +57,11 @@ class FirestoreService {
   Stream<QuerySnapshot> getMyBids(String uid) {
     return _db.collection('bids').where('uid', isEqualTo: uid).snapshots();
   }
+
+  Stream<QuerySnapshot> getProductDetails(String productUid) {
+    return _db
+        .collection('products')
+        .where('Product_id', isEqualTo: productUid)
+        .snapshots();
+  }
 }

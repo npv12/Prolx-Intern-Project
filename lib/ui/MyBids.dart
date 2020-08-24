@@ -9,7 +9,7 @@ class MyBids extends StatefulWidget {
 }
 
 class _MyBidsState extends State<MyBids> {
-  List<String> productName = [];
+  List<String> productUid = [], productName = [];
   List<String> bidStatus = [];
   List<double> bidPrice = [];
   List<int> bidRank = [];
@@ -28,7 +28,7 @@ class _MyBidsState extends State<MyBids> {
               return Text("FETCHING");
             length = snapshot.data.documents.length;
             snapshot.data.documents.forEach((product) {
-              productName.add(product.data['Product Name']);
+              productUid.add(product.data['Product_id']);
               bidStatus.add(product.data['Bid Status']);
               bidRank.add(product.data['Bid Rank']);
               bidPrice.add(product.data['Bid Price']);
@@ -38,15 +38,25 @@ class _MyBidsState extends State<MyBids> {
               padding: const EdgeInsets.all(8),
               itemCount: length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 120,
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: ProductItem(
-                    bidPrice: bidPrice[index],
-                    bidRank: bidRank[index],
-                    bidStatus: bidStatus[index],
-                    productName: productName[index],
-                  ),
+                return StreamBuilder(
+                  stream:
+                      FirestoreService().getProductDetails(productUid[index]),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) return Text("FETCHING");
+                    snapshot.data.documents.forEach((product) {
+                      productName.add(product.data['Product Name']);
+                    });
+                    return Container(
+                      height: 120,
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: ProductItem(
+                        bidPrice: bidPrice[index],
+                        bidRank: bidRank[index],
+                        bidStatus: bidStatus[index],
+                        productName: productName[index],
+                      ),
+                    );
+                  },
                 );
               },
             );
@@ -58,42 +68,14 @@ class _MyBidsState extends State<MyBids> {
 }
 
 /*
-FutureBuilder(
-      future: FirestoreService().getMyBids(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        print(snapshot.data);
-        return Container(
-          child: Text("OOO"),
-        );
-      },
-    );
-
-
-
- if (!snapshot.hasData) return Text("FETCHING");
-        length = snapshot.data.documents.length;
-
-        snapshot.data.documents.forEach((product) {
-          productName.add(product.data['Product Name']);
-          bidStatus.add(product.data['Bid Status']);
-          bidRank.add(product.data['Bid Rank']);
-          bidPrice.add(product.data['Bid Price']);
-        });
-
-        return ListView.builder(
-          padding: const EdgeInsets.all(8),
-          itemCount: length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 120,
-              padding: EdgeInsets.only(bottom: 20),
-              child: ProductItem(
-                bidPrice: bidPrice[index],
-                bidRank: bidRank[index],
-                bidStatus: bidStatus[index],
-                productName: productName[index],
-              ),
-            );
-          },
-        );
+Container(
+                  height: 120,
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: ProductItem(
+                    bidPrice: bidPrice[index],
+                    bidRank: bidRank[index],
+                    bidStatus: bidStatus[index],
+                    productName: productName[index],
+                  ),
+                );
 */
