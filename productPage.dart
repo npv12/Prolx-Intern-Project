@@ -43,7 +43,7 @@ class _ProductPageState extends State<ProductPage> {
   Future getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
-      _image = image;
+      _image = null;
     });
   }
 

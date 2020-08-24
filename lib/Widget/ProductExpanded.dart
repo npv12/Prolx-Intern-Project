@@ -27,9 +27,7 @@ class _ExpandedPanel extends State<ExpandedPanel> {
         return ExpansionPanelRadio(
           value: item,
           headerBuilder: (BuildContext context, bool isExpanded) {
-            return ProductItem(
-              id: item,
-            );
+            return ProductItem();
           },
           body: BuildExpandedPanel(),
         );

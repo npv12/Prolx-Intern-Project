@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  const ProductItem({
-    Key key,
-    @required this.id,
-  }) : super(key: key);
+  final String bidStatus, productName;
+  final double bidPrice;
+  final int bidRank;
+  const ProductItem(
+      {Key key, this.bidStatus, this.productName, this.bidPrice, this.bidRank})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -22,10 +23,10 @@ class ProductItem extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
-                    text: "Product Name",
+                    text: "Product Name : $productName",
                   ),
                   TextField(
-                    text: "Bid Price:  100",
+                    text: "Bid Price:  $bidPrice",
                   ),
                 ],
               ),
@@ -35,10 +36,10 @@ class ProductItem extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TextField(
-                    text: "Status $id",
+                    text: "Status $bidStatus",
                   ),
                   TextField(
-                    text: "Bid Rank:  100",
+                    text: "Bid Rank:  $bidRank",
                   ),
                 ],
               ),
@@ -60,9 +61,12 @@ class TextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 18),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 18),
+        ),
       ),
     );
   }
