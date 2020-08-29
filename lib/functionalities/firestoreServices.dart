@@ -55,7 +55,7 @@ class FirestoreService {
   }
 
   Stream<QuerySnapshot> getMyBids(String uid) {
-    return _db.collection('bids').where('uid', isEqualTo: uid).snapshots();
+    return _db.collection('bids').where('uid', arrayContains: uid).snapshots();
   }
 
   Stream<QuerySnapshot> getProductDetails(String productUid) {
@@ -77,5 +77,15 @@ class FirestoreService {
         .collection('bids')
         .where('Product_id', isEqualTo: uid)
         .snapshots();
+  }
+
+  Future<String> getUserName(String uid) async {
+    String name;
+    await _db
+        .collection('users')
+        .where('uid', isEqualTo: uid)
+        .getDocuments()
+        .then((value) => (name = value.documents[0].data['name']));
+    return name;
   }
 }

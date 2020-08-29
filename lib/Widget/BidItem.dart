@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'TextField.dart';
 
-class ProductItem extends StatelessWidget {
+class BidItem extends StatelessWidget {
   final String bidStatus, productName;
-  final double bidPrice, fontSize = 14;
-  final int bidRank;
-  const ProductItem(
-      {Key key, this.bidStatus, this.productName, this.bidPrice, this.bidRank})
+  final double bidPrice;
+  final int totalBid;
+  const BidItem(
+      {Key key, this.bidStatus, this.productName, this.bidPrice, this.totalBid})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,9 @@ class ProductItem extends StatelessWidget {
                 children: <Widget>[
                   TextFieldForAll(
                     text: "Name : $productName",
-                    fsize: fontSize,
                   ),
                   TextFieldForAll(
-                    text: "Price:  $bidPrice",
-                    fsize: fontSize,
+                    text: "Highest Bid:  $bidPrice",
                   ),
                 ],
               ),
@@ -40,11 +38,9 @@ class ProductItem extends StatelessWidget {
                 children: <Widget>[
                   TextFieldForAll(
                     text: "Status $bidStatus",
-                    fsize: fontSize,
                   ),
                   TextFieldForAll(
-                    text: "Bid Rank:  $bidRank",
-                    fsize: fontSize,
+                    text: "Total Bid:  $totalBid",
                   ),
                 ],
               ),
