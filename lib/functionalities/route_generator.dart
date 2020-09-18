@@ -1,4 +1,5 @@
 import 'package:Prolx/ui/SignUpEmail.dart';
+import 'package:Prolx/ui/addProduct.dart';
 import 'package:Prolx/ui/categoryList.dart';
 import 'package:Prolx/ui/loginEmail.dart';
 import 'package:Prolx/ui/mainScreen.dart';
@@ -36,6 +37,10 @@ class RouteGenerator {
           builder: (_) => CategoryList(
             cat: args,
           ),
+        );
+      case '/addProduct':
+        return MaterialPageRoute(
+          builder: (_) => AddProduct(),
         );
       // case '/description':
       //   return MaterialPageRoute(

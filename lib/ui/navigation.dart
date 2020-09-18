@@ -1,3 +1,4 @@
+import 'package:Prolx/ui/addProduct.dart';
 import 'package:Prolx/ui/homePage.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,7 @@ class _NavigationState extends State<Navigation> {
         children: <Widget>[
           HomePage(),
           Dashboard(),
+          AddProduct(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -38,7 +40,9 @@ class _NavigationState extends State<Navigation> {
             BottomNavigationBarItem(
                 title: Text('Home'), icon: Icon(Icons.home)),
             BottomNavigationBarItem(
-                title: Text('Dashboard'), icon: Icon(Icons.dashboard))
+                title: Text('Dashboard'), icon: Icon(Icons.dashboard)),
+            BottomNavigationBarItem(
+                title: Text('Add Product'), icon: Icon(Icons.add_box))
           ],
           currentIndex: _selectedIndex,
           onTap: (value) {
